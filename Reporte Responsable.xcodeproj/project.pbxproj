@@ -365,7 +365,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KDGTWK4756;
-				INFOPLIST_FILE = Ingenieros/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Reporte Responsable/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chilangolabs.reporteresponsable;
@@ -382,7 +382,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KDGTWK4756;
-				INFOPLIST_FILE = Ingenieros/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Reporte Responsable/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chilangolabs.reporteresponsable;

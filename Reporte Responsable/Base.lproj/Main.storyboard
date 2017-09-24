@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="t63-pc-xUH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7Pi-Xc-YXB">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Reportar-->
         <scene sceneID="HaN-UF-25M">
             <objects>
                 <viewController id="t63-pc-xUH" customClass="ViewController" customModule="Reporte_Responsable" customModuleProvider="target" sceneMemberID="viewController">
@@ -20,10 +20,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vwa-53-OM3">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="499"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T90-iF-KZQ" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="20" width="320" height="1700"/>
+                                        <rect key="frame" x="0.0" y="20" width="320" height="1750"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre Completo del Contacto *" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c8Y-KH-tXz">
                                                 <rect key="frame" x="8" y="8" width="188" height="15"/>
@@ -367,7 +367,7 @@
                                             <constraint firstItem="jQm-m2-6oh" firstAttribute="leading" secondItem="T90-iF-KZQ" secondAttribute="leading" constant="8" id="Xdy-m6-Jfp"/>
                                             <constraint firstItem="Ppj-if-468" firstAttribute="top" secondItem="t6u-f7-izb" secondAttribute="bottom" constant="8" id="Z1Y-37-3mH"/>
                                             <constraint firstItem="Pjz-jl-jnp" firstAttribute="leading" secondItem="T90-iF-KZQ" secondAttribute="leading" constant="8" id="Z1j-mh-hI4"/>
-                                            <constraint firstAttribute="height" constant="1700" id="Z2u-CY-ra6"/>
+                                            <constraint firstAttribute="height" constant="1750" id="Z2u-CY-ra6"/>
                                             <constraint firstItem="lM7-BW-9Kn" firstAttribute="leading" secondItem="T90-iF-KZQ" secondAttribute="leading" constant="8" id="Z3F-1S-cXw"/>
                                             <constraint firstAttribute="trailing" secondItem="LIr-F3-z8g" secondAttribute="trailing" constant="8" id="b5N-Q7-r18"/>
                                             <constraint firstItem="43p-vk-Z9c" firstAttribute="leading" secondItem="T90-iF-KZQ" secondAttribute="leading" constant="8" id="bj3-Zy-yZq"/>
@@ -432,6 +432,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uyF-jz-80z"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Reportar" image="ReportIcon" id="8Tg-rI-smt"/>
                     <connections>
                         <outlet property="city" destination="w6a-Wp-SZq" id="uTU-FW-hue"/>
                         <outlet property="contact" destination="qfe-iI-Wt1" id="OXG-jH-p3P"/>
@@ -460,7 +461,45 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Yi-Iy-DO4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="877.5" y="132.04225352112675"/>
+            <point key="canvasLocation" x="1283" y="-62"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="BRa-ND-g5Q">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="7Pi-Xc-YXB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Obs-Ya-eHd">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="t63-pc-xUH" kind="relationship" relationship="viewControllers" id="E3g-DP-poE"/>
+                        <segue destination="pUI-50-QLc" kind="relationship" relationship="viewControllers" id="bl1-bf-0ZG"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f86-fc-Z5L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="114" y="277"/>
+        </scene>
+        <!--Mi Reporte-->
+        <scene sceneID="dE4-oy-TfH">
+            <objects>
+                <viewController id="pUI-50-QLc" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1Dk-1Y-ar3">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="iMO-Zl-901"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Mi Reporte" image="SearchIcon" id="d7m-te-nf6"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aoU-UI-qd7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1283" y="630"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ReportIcon" width="30" height="30"/>
+        <image name="SearchIcon" width="30" height="30"/>
+    </resources>
 </document>

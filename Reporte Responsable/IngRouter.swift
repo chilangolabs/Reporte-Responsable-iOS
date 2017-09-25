@@ -13,10 +13,11 @@ public enum IngRouter: URLRequestConvertible {
     static let baseURLPath = "https://criptexfc.com/tlalolin/admin/app"
     
     case report
+    case search(String)
     
     var method: HTTPMethod {
         switch self {
-        case .report:
+        case .report, .search:
             return .post
         }
     }
@@ -25,6 +26,8 @@ public enum IngRouter: URLRequestConvertible {
         switch self {
         case .report:
             return "/addMensaje"
+        case .search(let reportId):
+            return "/getMensaje/\(reportId)"
         }
     }
     

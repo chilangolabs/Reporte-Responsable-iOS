@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ReportViewController.swift
 //  Reporte Responsable
 //
 //  Created by Rodrigo on 20/09/17.
@@ -10,7 +10,7 @@ import Alamofire
 import MapKit
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, MKMapViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class ReportViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, MKMapViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
@@ -38,12 +38,17 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     weak var activeField: UITextField?
     
-    let typePropertyData = ["Hospital", "Escuela", "Estancia Infantil", "Departamento", "Casa", "Comercio",
-        "Oficinas Públicas", "Oficinas Privadas", "Industria", "Centro de Reunión", "Estacionamiento",
-        "Recreativo", "Otro"]
-    let damagesData = ["Derrumbe Total", "Derrumbe Parcial", "Grietas en Muros y Acabados", "Grietas en Trabes y Columnas", "Asentamiento o Hundimiento", "Daños en vidrios y cancelerías"]
-    let damagesLocationData = ["Interior", "Exterior", "Ambas"]
-    let isEvacuatedData = ["Si", "No", "Parcialmente"]
+    let typePropertyDataSource: [(key: String, value: String)]  = [("hospital", "Hospital"), ("escuela", "Escuela"), ("estanciaInfantil", "Estancia Infantil"), ("depatamento", "Departamento"), ("casa", "Casa"), ("comercio", "Comercio"), ("oficinasPublicas", "Oficinas Públicas"), ("oficinasPrivadas", "Oficinas Privadas"), ("industria", "Industria"), ("centroDeReunion", "Centro de Reunión"), ("estacionamiento", "Estacionamiento"),
+        ("recreativo", "Recreativo"), ("otro", "Otro")]
+    let damagesDataSource: [(key: String, value: String)] = [("derrumbeTotal", "Derrumbe Total"), ("derrumbeParcial", "Derrumbe Parcial"), ("grietasMuros", "Grietas en Muros y Acabados"), ("grietasTrabes", "Grietas en Trabes y Columnas"), ("asentamiento", "Asentamiento o Hundimiento"), ("danoVidrios", "Daños en vidrios y cancelerías")]
+    let damagesLocationDataSource: [(key: String, value: String)] = [("interior", "Interior"), ("exterior", "Exterior"), ("ambas", "Ambas")]
+    let isEvacuatedDataSource: [(key: String, value: String)] = [("si", "Si"), ("no", "No"), ("parcialmente", "Parcialmente")]
+    
+    var imagePicked = 0
+    var typePropertyData = ""
+    var damagesData = ""
+    var damagesLocationData = ""
+    var isEvacuatedData = ""
     
     
     let locationManager = CLLocationManager()
@@ -132,13 +137,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch pickerView.tag {
         case 1:
-            return self.typePropertyData.count
+            return self.typePropertyDataSource.count
         case 2:
-            return self.damagesData.count
+            return self.damagesDataSource.count
         case 3:
-            return self.damagesLocationData.count
+            return self.damagesLocationDataSource.count
         case 4:
-            return self.isEvacuatedData.count
+            return self.isEvacuatedDataSource.count
         default:
             return 0
         }
@@ -147,13 +152,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch pickerView.tag {
         case 1:
-            return self.typePropertyData[row]
+            return self.typePropertyDataSource[row].value
         case 2:
-            return self.damagesData[row]
+            return self.damagesDataSource[row].value
         case 3:
-            return self.damagesLocationData[row]
+            return self.damagesLocationDataSource[row].value
         case 4:
-            return self.isEvacuatedData[row]
+            return self.isEvacuatedDataSource[row].value
         default:
             return nil
         }
@@ -162,20 +167,23 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         switch pickerView.tag {
         case 1:
-            self.typeProperty.text = self.typePropertyData[row]
+            self.typeProperty.text = self.typePropertyDataSource[row].value
+            self.typePropertyData = self.typePropertyDataSource[row].key
         case 2:
-            self.damages.text = self.damagesData[row]
+            self.damages.text = self.damagesDataSource[row].value
+            self.damagesData = self.damagesDataSource[row].key
         case 3:
-            self.damagesLocation.text = self.damagesLocationData[row]
+            self.damagesLocation.text = self.damagesLocationDataSource[row].value
+            self.damagesLocationData = self.damagesLocationDataSource[row].key
         case 4:
-            self.isEvacuated.text = self.isEvacuatedData[row]
+            self.isEvacuated.text = self.isEvacuatedDataSource[row].value
+            self.isEvacuatedData = self.isEvacuatedDataSource[row].key
         default:
             break
         }
     }
     
     @objc func pickerViewDone (_ sender: UIBarButtonItem) {
-        print("DONE")
         self.typeProperty.resignFirstResponder()
         self.damages.resignFirstResponder()
         self.damagesLocation.resignFirstResponder()
@@ -221,9 +229,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        // TODO
         let photoTaken = info[UIImagePickerControllerOriginalImage] as! UIImage
-        self.photo.image = photoTaken
+        
+        if imagePicked == 1 {
+            self.photo.image = photoTaken
+        } else if imagePicked == 2 {
+            self.elementPhoto.image = photoTaken
+        }
         
         dismiss(animated: true, completion: nil)
     }
@@ -245,13 +257,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
 
     @IBAction func capturePhoto(_ sender: UIButton) {
+        self.imagePicked = sender.tag
+        
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.sourceType = .camera
         self.present(picker, animated: true, completion: nil)
-    }
-
-    @IBAction func captureElementPhoto(_ sender: UIButton) {
     }
     
     @objc func addAnnotation(_ sender: UIGestureRecognizer) -> Void {
@@ -263,19 +274,20 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
     
     @IBAction func sendReport(_ sender: UIButton) -> Void {
-        if (self.contact.text?.isEmpty)! || (self.phone.text?.isEmpty)! || (self.observations.text?.isEmpty)! || self.photo.image == nil {
+        if (self.contact.text?.isEmpty)! || (self.phone.text?.isEmpty)! || (self.phone.text?.isEmpty)! || (self.observations.text?.isEmpty)! || (self.street.text?.isEmpty)! || (self.number.text?.isEmpty)! || (self.neighborhood.text?.isEmpty)! || (self.city.text?.isEmpty)! || (self.zipCode.text?.isEmpty)! || (self.typeProperty.text?.isEmpty)! || (self.damages.text?.isEmpty)! || (self.damagesLocation.text?.isEmpty)! || (self.levels.text?.isEmpty)! || (self.habitants.text?.isEmpty)! || (self.isEvacuated.text?.isEmpty)! || self.photo.image == nil {
             let alert = UIAlertController(title: "Error", message: "Debes completar todos los campos", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         } else {
             self.takePhotoButton.isEnabled = false
+            self.takeElementsPhotoButton.isEnabled = false
             self.sendReportButton.isEnabled = false
             self.upload(image: [self.photo.image!, self.elementPhoto.image!], progressCompletion: {percent in
                 
-                }, completion: {response in
+                }, completion: {reportId in
                     self.cleanAllData()
                     
-                    let alert = UIAlertController(title: "", message: "Gracias por tu reporte", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "", message: "Gracias por tu reporte\nTu número de reporte es: \(reportId)\nRecuerda guardarlo en un lugar seguro", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
             })
@@ -285,17 +297,30 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     func cleanAllData () -> Void {
         self.contact.text = ""
         self.phone.text = ""
+        self.email.text = ""
+        self.street.text = ""
+        self.number.text = ""
+        self.neighborhood.text = ""
+        self.city.text = ""
+        self.zipCode.text = ""
+        self.typeProperty.text = ""
+        self.damages.text = ""
+        self.damagesLocation.text = ""
+        self.levels.text = ""
+        self.habitants.text = ""
+        self.isEvacuated.text = ""
         self.observations.text = ""
         self.photo.image = nil
         self.map.removeAnnotations(self.map.annotations)
         self.takePhotoButton.isEnabled = true
+        self.takeElementsPhotoButton.isEnabled = true
         self.sendReportButton.isEnabled = true
     }
     
 }
 
-extension ViewController {
-    func upload(image: [UIImage], progressCompletion: @escaping (_ percent: Float) -> Void, completion: @escaping(_ response: [String]) -> Void) {
+extension ReportViewController {
+    func upload(image: [UIImage], progressCompletion: @escaping (_ percent: Float) -> Void, completion: @escaping(_ response: String) -> Void) {
         guard let imageData = UIImageJPEGRepresentation(image[0], 0.7),
         let imageElementsData = UIImageJPEGRepresentation(image[1], 0.7) else {
             print("Error: Could not get JPEG representation for UIImage")
@@ -305,6 +330,18 @@ extension ViewController {
         Alamofire.upload(multipartFormData: {multipartFormData in
             multipartFormData.append((self.contact.text?.data(using: String.Encoding.utf8))!, withName: "contacto")
             multipartFormData.append((self.phone.text?.data(using: String.Encoding.utf8))!, withName: "telefono")
+            multipartFormData.append((self.email.text?.data(using: String.Encoding.utf8))!, withName: "correo")
+            multipartFormData.append((self.street.text?.data(using: String.Encoding.utf8))!, withName: "calle")
+            multipartFormData.append((self.number.text?.data(using: String.Encoding.utf8))!, withName: "numero")
+            multipartFormData.append((self.neighborhood.text?.data(using: String.Encoding.utf8))!, withName: "colonia")
+            multipartFormData.append((self.city.text?.data(using: String.Encoding.utf8))!, withName: "municipio")
+            multipartFormData.append((self.zipCode.text?.data(using: String.Encoding.utf8))!, withName: "cp")
+            multipartFormData.append((self.typePropertyData.data(using: String.Encoding.utf8))!, withName: "tipo")
+            multipartFormData.append((self.damagesData.data(using: String.Encoding.utf8))!, withName: "afectaciones")
+            multipartFormData.append((self.damagesLocationData.data(using: String.Encoding.utf8))!, withName: "ubicacion")
+            multipartFormData.append((self.levels.text?.data(using: String.Encoding.utf8))!, withName: "niveles")
+            multipartFormData.append((self.habitants.text?.data(using: String.Encoding.utf8))!, withName: "residentes")
+            multipartFormData.append((self.isEvacuatedData.data(using: String.Encoding.utf8))!, withName: "evacuado")
             multipartFormData.append((self.observations.text?.data(using: String.Encoding.utf8))!, withName: "observaciones")
             multipartFormData.append(String(self.map.annotations[0].coordinate.latitude).data(using: String.Encoding.utf8)!, withName: "latitud")
             multipartFormData.append(String(self.map.annotations[0].coordinate.longitude).data(using: String.Encoding.utf8)!, withName: "longitud")
@@ -318,22 +355,30 @@ extension ViewController {
                 }
                 upload.validate()
                 upload.responseJSON {response in
-                    print("Respuesta: \(response)")
-                    
                     guard response.result.isSuccess else {
                         print("Error while uploading file: \(String(describing: response.result.error))")
-                        completion([String]())
+                        completion(String())
                         return
                     }
                     
                     guard let responseJSON = response.result.value as? [String: Any],
-                    let extra = responseJSON["extra"] as? [String: Any] else {
-                        print("Invalid information received from service")
-                        completion([String]())
-                        return
+                        let isValid = responseJSON["success"] as? Int else {
+                            print("Invalid information received from service")
+                            completion(String())
+                            return
                     }
                     
-                    print("Extra: \(extra)")
+                    if isValid == 0 {
+                        let alert = UIAlertController(title: "Error", message: "Ocurrio un error, intenta de nuevo", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    } else {
+                        guard let reportId = responseJSON["random_id"] as? String else {
+                            return
+                        }
+                        
+                        completion(reportId)
+                    }
                 }
             case .failure(let encodingError):
                 print(encodingError)

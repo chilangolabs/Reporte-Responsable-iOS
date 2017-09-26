@@ -1,6 +1,9 @@
 
 # Created by https://www.gitignore.io/api/osx,swift,xcode,cocoapods
 
+### Private ###
+ServiceAccount.json
+
 ### CocoaPods ###
 ## CocoaPods GitIgnore Template
 

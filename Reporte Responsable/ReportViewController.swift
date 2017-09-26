@@ -274,7 +274,7 @@ class ReportViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     }
     
     @IBAction func sendReport(_ sender: UIButton) -> Void {
-        if (self.contact.text?.isEmpty)! || (self.phone.text?.isEmpty)! || (self.phone.text?.isEmpty)! || (self.observations.text?.isEmpty)! || (self.street.text?.isEmpty)! || (self.number.text?.isEmpty)! || (self.neighborhood.text?.isEmpty)! || (self.city.text?.isEmpty)! || (self.zipCode.text?.isEmpty)! || (self.typeProperty.text?.isEmpty)! || (self.damages.text?.isEmpty)! || (self.damagesLocation.text?.isEmpty)! || (self.levels.text?.isEmpty)! || (self.habitants.text?.isEmpty)! || (self.isEvacuated.text?.isEmpty)! || self.photo.image == nil {
+        if (self.contact.text?.isEmpty)! || (self.phone.text?.isEmpty)! || (self.phone.text?.isEmpty)! || (self.observations.text?.isEmpty)! || (self.street.text?.isEmpty)! || (self.number.text?.isEmpty)! || (self.neighborhood.text?.isEmpty)! || (self.city.text?.isEmpty)! || (self.zipCode.text?.isEmpty)! || (self.typeProperty.text?.isEmpty)! || (self.damages.text?.isEmpty)! || (self.damagesLocation.text?.isEmpty)! || (self.levels.text?.isEmpty)! || (self.habitants.text?.isEmpty)! || (self.isEvacuated.text?.isEmpty)! || self.photo.image == nil || self.elementPhoto.image == nil {
             let alert = UIAlertController(title: "Error", message: "Debes completar todos los campos", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)

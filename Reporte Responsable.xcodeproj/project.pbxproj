@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5B07A5BB1F73AB0700D73C93 /* IngRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B07A5BA1F73AB0700D73C93 /* IngRouter.swift */; };
+		5B98005E1F7A182500C02809 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B98005D1F7A17BF00C02809 /* GoogleService-Info.plist */; };
 		5B9F43AF1F785378007683F8 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9F43AE1F785378007683F8 /* SearchViewController.swift */; };
 		5B9F43B11F7876C3007683F8 /* ReportStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9F43B01F7876C3007683F8 /* ReportStatus.swift */; };
 		5BA908011F73728D005CB2D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA908001F73728D005CB2D8 /* AppDelegate.swift */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		416A62F3C6BC981AD4A57980 /* Pods-Reporte Responsable.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reporte Responsable.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Reporte Responsable/Pods-Reporte Responsable.debug.xcconfig"; sourceTree = "<group>"; };
 		5B07A5BA1F73AB0700D73C93 /* IngRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngRouter.swift; sourceTree = "<group>"; };
+		5B98005D1F7A17BF00C02809 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5B9F43AE1F785378007683F8 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		5B9F43B01F7876C3007683F8 /* ReportStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportStatus.swift; sourceTree = "<group>"; };
 		5BA907FD1F73728D005CB2D8 /* Reporte Responsable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Reporte Responsable.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -32,6 +34,7 @@
 		5BA9080A1F73728E005CB2D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5BA9080C1F73728E005CB2D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5BA908131F737D38005CB2D8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		5BE899361F7A01A2005B6D02 /* Reporte Responsable.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Reporte Responsable.entitlements"; sourceTree = "<group>"; };
 		BA053F0B7D684AD264EC197B /* Pods_Reporte_Responsable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reporte_Responsable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F04DF9EF123488D6F5DF8BBD /* Pods-Reporte Responsable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reporte Responsable.release.xcconfig"; path = "Pods/Target Support Files/Pods-Reporte Responsable/Pods-Reporte Responsable.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,6 +82,7 @@
 		5BA907FF1F73728D005CB2D8 /* Reporte Responsable */ = {
 			isa = PBXGroup;
 			children = (
+				5BE899361F7A01A2005B6D02 /* Reporte Responsable.entitlements */,
 				5BA908001F73728D005CB2D8 /* AppDelegate.swift */,
 				5BA908021F73728D005CB2D8 /* ReportViewController.swift */,
 				5B9F43AE1F785378007683F8 /* SearchViewController.swift */,
@@ -88,6 +92,7 @@
 				5BA908071F73728E005CB2D8 /* Assets.xcassets */,
 				5BA908091F73728E005CB2D8 /* LaunchScreen.storyboard */,
 				5BA9080C1F73728E005CB2D8 /* Info.plist */,
+				5B98005D1F7A17BF00C02809 /* GoogleService-Info.plist */,
 			);
 			path = "Reporte Responsable";
 			sourceTree = "<group>";
@@ -141,6 +146,9 @@
 							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
+							com.apple.Push = {
+								enabled = 1;
+							};
 						};
 					};
 				};
@@ -168,6 +176,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B98005E1F7A182500C02809 /* GoogleService-Info.plist in Resources */,
 				5BA9080B1F73728E005CB2D8 /* LaunchScreen.storyboard in Resources */,
 				5BA908081F73728E005CB2D8 /* Assets.xcassets in Resources */,
 				5BA908061F73728D005CB2D8 /* Main.storyboard in Resources */,
@@ -372,8 +381,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = "Reporte Responsable/Reporte Responsable.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3F72X9NPWN;
+				DEVELOPMENT_TEAM = P458GN3DZL;
 				INFOPLIST_FILE = "$(SRCROOT)/Reporte Responsable/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -390,8 +400,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = "Reporte Responsable/Reporte Responsable.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3F72X9NPWN;
+				DEVELOPMENT_TEAM = P458GN3DZL;
 				INFOPLIST_FILE = "$(SRCROOT)/Reporte Responsable/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

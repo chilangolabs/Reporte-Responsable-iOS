@@ -7,4 +7,7 @@ target 'Reporte Responsable' do
 
   # Pods for Reporte Responsable
   pod 'Alamofire', '~> 4.2.0'
+  pod 'Firebase/Core'
+  pod 'Firebase/Crash'
+  pod "Firebase/Messaging"
 end

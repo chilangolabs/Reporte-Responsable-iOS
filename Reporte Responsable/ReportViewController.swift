@@ -35,6 +35,7 @@ class ReportViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     @IBOutlet weak var takePhotoButton: UIButton!
     @IBOutlet weak var takeElementsPhotoButton: UIButton!
     @IBOutlet weak var sendReportButton: UIButton!
+    @IBOutlet weak var contentViewHeight: NSLayoutConstraint!
     
     weak var activeField: UITextField?
     
@@ -62,6 +63,17 @@ class ReportViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.scrollView.keyboardDismissMode = .onDrag
+        
+        // Altura según el dispositivo
+        if UIScreen.main.bounds.height == 736 {
+            self.contentViewHeight.constant = 1800
+        } else if UIScreen.main.bounds.height == 667 {
+            self.contentViewHeight.constant = 1750
+        } else if UIScreen.main.bounds.height == 568 {
+            self.contentViewHeight.constant = 1700
+        } else {
+            self.contentViewHeight.constant = 1600
+        }
         
         
         self.locationManager.delegate = self
